@@ -1,41 +1,45 @@
+function setAttributes(el, attrs) {
+    for(let key in attrs) {
+        el.setAttribute(key, attrs[key]);
+    }
+}
+
+function setChilds(el, childs) {
+    for(let key in childs) {
+        el.appendChild(childs[key]);
+    }
+}
+
 function toSend() {
-    var name = document.getElementById("name");
-    var nameValue = name.value;
-    var nameText = document.createTextNode(nameValue);
-    var date = document.getElementById("date");
-    var dateValue = date.value;
-    var dateText = document.createTextNode(dateValue);
-    var amount = document.getElementById("amount");
-    var amountValue = "$" + amount.value;
-    var amountText = document.createTextNode(amountValue);
+    let nameValue = document.getElementById("name").value;
+    let nameText = document.createTextNode(nameValue);
+    let dateValue = document.getElementById("date").value;
+    let dateText = document.createTextNode(dateValue);
+    let amountValue = "$" + document.getElementById("amount").value;
+    let amountText = document.createTextNode(amountValue);
 
     if (nameValue === "" || dateValue === "" || amountValue === "$") {
         alert("You need to fill in all the camps!");
         return false;
     }
 
-    var tdName = document.createElement("td");
+    let tdName = document.createElement("td");
     tdName.appendChild(nameText);
 
-    var tdDate = document.createElement("td");
+    let tdDate = document.createElement("td");
     tdDate.appendChild(dateText);
 
-    var tdAmount = document.createElement("td");
+    let tdAmount = document.createElement("td");
     tdAmount.appendChild(amountText);
 
-    var buttonInput = document.createElement("input");
-    buttonInput.setAttribute("type", "button");
-    buttonInput.setAttribute("value", "X");
-    buttonInput.setAttribute("onclick", "deleteThis(this)");
+    let buttonInput = document.createElement("input");
+    setAttributes(buttonInput, { "type": "button", "value": "X", "onclick": "deleteThis(this)" });
 
-    var tr = document.createElement("tr");
+    let tr = document.createElement("tr");
     tr.setAttribute("id", "tb");
-    tr.appendChild(tdName);
-    tr.appendChild(tdDate);
-    tr.appendChild(tdAmount);
-    tr.appendChild(buttonInput);
+    setChilds(tr, { tdName, tdDate, tdAmount, buttonInput });
 
-    var table = document.getElementById("body");
+    let table = document.getElementById("body");
     table.appendChild(tr);
 
     clearInputs();
